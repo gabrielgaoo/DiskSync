@@ -1,0 +1,36 @@
+spring:
+  application:
+      name: "DiskSync"
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  datasource:
+      url: "${URL_DB}/${DATABASE}"
+      username: ${USERNAME}
+      password: ${PASSWORD}
+      driver-class-name: "com.mysql.cj.jdbc.Driver"
+      datasource: ${DATABASE}
+  jpa:
+    hibernate:
+        ddl-auto: "update"
+server:
+  port: ${PORT}
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
+    operationsSorter: method
+    tagsSorter: alpha
+
+api:
+  security:
+    token:
+      secret: ${JWT_SECRET}
+
+  spotify:
+    client-id: ${CLIENT_ID}
+    client-secret: ${CLIENT_SECRET}
+    redirect-uri: "http://localhost:8082/callback"
