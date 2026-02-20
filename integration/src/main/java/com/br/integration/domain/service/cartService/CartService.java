@@ -51,12 +51,8 @@ public class CartService {
 
         cart.addAlbum(albumId);
 
-        try {
-            double albumPrice = albumService.getAlbumId(albumId).getBody().price();
-            cart.setTotalValue(cart.getTotalValue() + albumPrice);
-        } catch (Exception e) {
-            throw new InvalidCartOperationException("Erro ao buscar informações do álbum.");
-        }
+        double albumPrice = albumService.getAlbumId(albumId).price();
+        cart.setTotalValue(cart.getTotalValue() + albumPrice);
 
         cart.setUpdatedAt(LocalDateTime.now());
         Cart saved = cartRepository.save(cart);
@@ -81,12 +77,8 @@ public class CartService {
             throw new InvalidCartOperationException("Álbum não encontrado no seu carrinho.");
         }
 
-        try {
-            double albumPrice = albumService.getAlbumId(albumId).getBody().price();
-            cart.setTotalValue(cart.getTotalValue() - albumPrice);
-        } catch (Exception e) {
-            throw new InvalidCartOperationException("Erro ao recalcular o valor do carrinho.");
-        }
+        double albumPrice = albumService.getAlbumId(albumId).price();
+        cart.setTotalValue(cart.getTotalValue() - albumPrice);
 
         cart.setUpdatedAt(LocalDateTime.now());
         Cart saved = cartRepository.save(cart);

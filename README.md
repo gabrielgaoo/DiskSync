@@ -1,12 +1,14 @@
 # DiskSync-Backend
 
-Sistema de gerenciamento desenvolvido com Spring Boot, fornecendo APIs RESTful para gestão de usuários, pedidos, carteiras e integração com Spotify.
+Repositório criado para um sistema de **delivery de vendas de discos de vinil**, desenvolvido com o objetivo de aprender e aplicar os principais conceitos de **Design Patterns** estudados na disciplina de **Projetos de Sistemas de Software**, ministrada pelo professor **Clayton Vieira Fraga**.
+
+O projeto oferece APIs RESTful para gestão de usuários, carrinho, pedidos, carteira e integração com a API do Spotify para busca e detalhes de álbuns.
 
 ## 📋 Pré-requisitos
 
 Antes de começar, certifique-se de ter instalado em seu ambiente:
 
-- **Java 17** 
+- **Java 20** 
 - **Maven 3.6+** 
 - **PostgreSQL 12+** 
 - **Git** 
@@ -16,7 +18,7 @@ Antes de começar, certifique-se de ter instalado em seu ambiente:
 ### 1. Clonar o repositório
 
 ```bash
-git clone <https://github.com/mariana-cunhaa/DiskSync>
+git clone https://github.com/gabrielgaoo/DiskSync.git
 ```
 
 ### 2. Configurar o banco de dados PostgreSQL
@@ -80,6 +82,12 @@ java -jar target/integration-0.0.1-SNAPSHOT.jar
 
 A aplicação estará disponível em: `http://localhost:8081`
 
+### Documentação da API (Swagger)
+
+- **Swagger UI** (interface interativa): [http://localhost:8081/swagger-ui.html](http://localhost:8081/swagger-ui.html)
+- **OpenAPI (JSON)**: [http://localhost:8081/v3/api-docs](http://localhost:8081/v3/api-docs)
+
+> Use a porta configurada na variável `PORT` (ex.: 8081). Se alterar a porta, substitua `8081` nas URLs acima.
 
 ## 🛠️ Tecnologias utilizadas
 

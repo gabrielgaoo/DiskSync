@@ -1,7 +1,6 @@
-package com.br.integration.domain.service.albumService.albumStrategy;
+package com.br.integration.domain.service.albumService.albumStrategy.albumPriceStrategy;
 
 import org.springframework.stereotype.Component;
-
 
 @Component
 public class PopularityAndCountTrackerAlbumPriceStrategy implements AlbumPriceStrategy {

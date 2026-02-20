@@ -1,4 +1,4 @@
-package com.br.integration.domain.service.orderService.OrderState;
+package com.br.integration.domain.service.orderService.orderState;
 
 import com.br.integration.domain.entites.Order;
 
@@ -6,18 +6,18 @@ public class InPreparation implements OrderState {
 
     @Override
     public void inPreparation(Order order) {
-        throw new IllegalStateException("Order is already in preparation.");
+        throw new IllegalStateException("Pedido já está em preparação.");
     }
 
     @Override
     public void forDelivery(Order order) {
         order.setStatus("FORDELIVERY");
         order.setState(new ForDelivery());
-        System.out.println("Order #" + order.getId() + " is now out for delivery.");
+        System.out.println("Pedido #" + order.getId() + " está em entrega.");
     }
 
     @Override
     public void received(Order order) {
-        throw new IllegalStateException("Order cannot be received while in preparation.");
+        throw new IllegalStateException("Pedido não pode ser recebido enquanto estiver em preparação.");
     }
 }

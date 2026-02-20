@@ -21,42 +21,26 @@ public class OrderController {
     @Operation(summary = "Listar meus pedidos", description = "Retorna todos os pedidos do usuário autenticado")
     @GetMapping
     public ResponseEntity<?> getMyOrders() {
-        try {
-            return ResponseEntity.ok(orderService.getMyOrders());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Erro ao buscar pedidos: " + e.getMessage());
-        }
+        return ResponseEntity.ok(orderService.getMyOrders());
     }
 
     @Operation(summary = "Status do pedido", description = "Retorna o status de um pedido pelo ID")
     @GetMapping("/{id}/status")
     public ResponseEntity<?> getStatus(@Parameter(description = "ID do pedido") @PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(orderService.getStatus(id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Erro ao buscar status do pedido: " + e.getMessage());
-        }
+        return ResponseEntity.ok(orderService.getStatus(id));
     }
 
     @Operation(summary = "Marcar em entrega", description = "Atualiza o pedido para status 'em entrega'")
     @PutMapping("/{id}/delivery")
     public ResponseEntity<?> updateToDelivery(@Parameter(description = "ID do pedido") @PathVariable Long id) {
-        try {
-            orderService.updateToDelivery(id);
-            return ResponseEntity.ok("O pedido de numero " + id + " já está a caminho para entrega.");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Erro ao atualizar pedido: " + e.getMessage());
-        }
+        orderService.updateToDelivery(id);
+        return ResponseEntity.ok("O pedido de numero " + id + " já está a caminho para entrega.");
     }
 
     @Operation(summary = "Marcar como entregue", description = "Atualiza o pedido para status 'entregue'")
     @PutMapping("/{id}/received")
     public ResponseEntity<?> updateToReceived(@Parameter(description = "ID do pedido") @PathVariable Long id) {
-        try {
-            orderService.updateToReceived(id);
-            return ResponseEntity.ok("O pedido de numero " + id + " foi entregue.");
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Erro ao atualizar pedido: " + e.getMessage());
-        }
+        orderService.updateToReceived(id);
+        return ResponseEntity.ok("O pedido de numero " + id + " foi entregue.");
     }
 }

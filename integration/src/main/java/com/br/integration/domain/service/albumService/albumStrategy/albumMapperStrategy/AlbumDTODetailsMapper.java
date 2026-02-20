@@ -1,4 +1,4 @@
-package com.br.integration.domain.service.albumService.albumMapper;
+package com.br.integration.domain.service.albumService.albumStrategy.albumMapperStrategy;
 
 import com.br.integration.domain.dto.AlbumDTODetails;
 import com.fasterxml.jackson.databind.JsonNode;

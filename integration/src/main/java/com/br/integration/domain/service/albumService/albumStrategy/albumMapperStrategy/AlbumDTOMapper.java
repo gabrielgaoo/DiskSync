@@ -1,11 +1,11 @@
-package com.br.integration.domain.service.albumService.albumMapper;
+package com.br.integration.domain.service.albumService.albumStrategy.albumMapperStrategy;
 
 import com.br.integration.domain.dto.AlbumDTO;
 import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AlbumDTOMapper implements SpotifyResponseMapper<AlbumDTO> {
+public class AlbumDTOMapper implements AlbumMapperStrategy<JsonNode, AlbumDTO> {
 
     @Override
     public AlbumDTO map(JsonNode node) {

@@ -22,12 +22,8 @@ public class CheckoutController {
 
     @Operation(summary = "Confirmar checkout", description = "Finaliza o carrinho e gera o pedido para o usuário autenticado")
     @PostMapping("/confirm")
-    public ResponseEntity<?> confirmCheckout() {
-        try {
-            Order order = checkoutService.confirmCheckout();
-            return ResponseEntity.ok(order);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+    public ResponseEntity<Order> confirmCheckout() {
+        Order order = checkoutService.confirmCheckout();
+        return ResponseEntity.ok(order);
     }
 }

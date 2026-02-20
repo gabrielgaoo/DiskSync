@@ -5,9 +5,9 @@ import com.br.integration.domain.exception.orderException.InvalidOrderStateExcep
 import com.br.integration.domain.exception.orderException.OrderNotFoundException;
 import com.br.integration.domain.entites.Order;
 import com.br.integration.domain.repository.OrderRepository;
-import com.br.integration.domain.service.orderService.OrderState.InPreparation;
-import com.br.integration.domain.service.orderService.OrderState.ForDelivery;
-import com.br.integration.domain.service.orderService.OrderState.Received;
+import com.br.integration.domain.service.orderService.orderState.InPreparation;
+import com.br.integration.domain.service.orderService.orderState.ForDelivery;
+import com.br.integration.domain.service.orderService.orderState.Received;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -95,7 +95,7 @@ public class OrderService {
             case "PREPARE" -> order.setState(new InPreparation());
             case "FORDELIVERY" -> order.setState(new ForDelivery());
             case "RECEIVED" -> order.setState(new Received());
-            default -> throw new InvalidOrderStateException("Estado desconhecido: " + order.getStatus());
+            default -> throw new InvalidOrderStateException("Status desconhecido: " + order.getStatus());
         }
     }
 }

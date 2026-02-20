@@ -1,4 +1,4 @@
-package com.br.integration.domain.service.orderService.OrderState;
+package com.br.integration.domain.service.orderService.orderState;
 
 import com.br.integration.domain.entites.Order;
 

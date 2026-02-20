@@ -14,9 +14,7 @@ import com.br.integration.domain.repository.UserRepository;
 import com.br.integration.domain.exception.userexception.UserException;
 import com.br.integration.domain.repository.WalletRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -29,7 +27,6 @@ import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-@Slf4j
 @Service
 public class UserService implements UserDetailsService {
 
@@ -86,46 +83,37 @@ public class UserService implements UserDetailsService {
         return this.usersRepository.save(existingUser);
     }
 
-    public ResponseEntity<?> deleteUser(String email) {
+    public void deleteUser(String email) {
         User user = usersRepository.findByEmail(email)
                 .orElseThrow(() -> new UserException("Usuário com email " + email + " não foi encontrado."));
-        
+
         String currentUserEmail = authenticationService.getCurrentUserEmail();
         if (!currentUserEmail.equals(email)) {
             throw new UserException("Você não tem permissão para deletar este usuário.");
         }
-        
-        log.info("Iniciando exclusão do usuário: {}", email);
-        
+
         List<Order> orders = orderRepository.findByUserEmail(email);
         if (!orders.isEmpty()) {
             orderRepository.deleteAll(orders);
-            log.info("Deletados {} pedido(s) do usuário {}", orders.size(), email);
         }
-        
+
         Optional<Cart> cartOptional = cartRepository.findByUserEmail(email);
         if (cartOptional.isPresent()) {
             cartRepository.delete(cartOptional.get());
-            log.info("Carrinho do usuário {} deletado", email);
         }
-        
+
         Optional<Wallet> walletOptional = walletRepository.findByUser(user);
         if (walletOptional.isPresent()) {
             walletRepository.delete(walletOptional.get());
-            log.info("Carteira do usuário {} deletada", email);
         }
-        
-        usersRepository.delete(user);
-        log.info("Usuário {} deletado com sucesso", email);
-        
-        return ResponseEntity.noContent().build();
-    }
-    public ResponseEntity<List<UserDTO>> listUsers() {
-        List<UserDTO> users = this.usersRepository.findAll().stream()
-                .map(user -> new UserDTO(user.getName(),user.getUsername()))
-                .toList();
 
-        return ResponseEntity.ok(users);
+        usersRepository.delete(user);
+    }
+
+    public List<UserDTO> listUsers() {
+        return this.usersRepository.findAll().stream()
+                .map(user -> new UserDTO(user.getName(), user.getUsername()))
+                .toList();
     }
     @Override
     public  UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
